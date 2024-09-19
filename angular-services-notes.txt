@@ -1,0 +1,131 @@
+Service in angular -
+
+It is injectable class in angular.
+It contains properties and functions.
+
+injectable - services can be injected in component, directives
+or in any other services
+
+
+purpose of services in angular -
+
+- external api calls code you write here
+- reusable code we can keep it service
+- keep datas in service
+- login functionality keep it in the service
+- secondary logic we can write service
+- passing data among component who have no heirarchical relationship
+
+
+Types of services in angular -
+
+1> Built in services    - httpClient , Router , ActivatedRoute
+2> user defined services - ng generate service  data (ng g s data)
+
+httpClient - we can make api call (get,post,put,delete)
+
+
+data-service.ts
+@Injectable
+export class DataService
+{
+  name="Ravi"
+  method2()
+ {
+  alert("Hello " + this.name);
+  }
+}
+
+
+Component
+Dashboard.component.ts
+
+export class DashboardComponent
+{
+constructor(private obj:Dataservice){} // injection
+
+obj=inject(DataService);
+
+method2()
+{
+ alert(obj.name) 
+ obj.method()
+}
+
+}
+
+
+
+Service
+@Injectable
+export class Service2
+{
+constructor(private obj1:DataService){}
+method3()
+{
+obj1.method()
+}
+}
+
+Asynchronous Programming in angular -
+
+1> Promise     - data got consumed when the ful data is ready for it to consume 
+2> Observable  - data will fetched packets by packets chunks by chunks
+
+in RxJs library angular
+
+observable are streams of data
+observer are who subscribe the data
+obs = new Observable((observer)=>
+{
+    observer.next("1");
+    observer.next("2");
+    observer.next("3");
+    observer.error("server down")
+    observer.complete("everything is successfully done")
+}
+
+console.log("continue")
+
+obs.subscribe({
+next:(val)=>consloe.log(val);
+error:(err)=>console.log(err)
+complete:()=>console.log("data fetched successfuly")
+
+})
+
+
+Producer - Subscribe methodology used in Observable
+
+in the observable we can use some RxJs operator
+
+map()
+filter()
+pipe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
