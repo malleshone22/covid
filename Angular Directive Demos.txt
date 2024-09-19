@@ -1,0 +1,401 @@
+Types of Angular Directives :
+=============================
+1. Structural Directives -> change appearance of DOM by adding  or removing element, *ngFor,*ngIf,*ngSwitch
+2. Attribute Directives -> change appearance of DOM by modifying attribute of DOM, ngStyle,ngClass 
+3. Component Directives -> App component (this directives with their own template and elements)
+=================================================================================================
+Builtin directive: 
+1. *ngFor
+2. *ngIf
+3. *ngSwitch
+==============================================================================
+contents rendered dynamically - *ngFor, *ngIF, *ngSwitch
+template elements styled dynamically - ngClass, ngStyle
+==============================================================================
+We create Angular directive (custom / user defined)-> to add  behavior to DOM.
+DOM is tree structure.
+manipulation of DOM -> Directives
+==============================================================================
+Demo1 : ngFor
+===============
+
+1. create student interface inside src/app
+
+student.ts
+
+export interface Student{
+ sid:number;
+ sname:string;
+ isAvailhostel:boolean;
+}
+===============================================================================================
+// Array of Objects -> Mock / simulating
+2. create mock.students.ts inside src/app
+
+import {Student} from './student';
+
+export const STUDENTS : Student[]=[
+    {sid:1, sname:'Anjali',isAvailhostel:true},
+    {sid:2, sname:'Gowtham',isAvailhostel:false},
+    {sid:3, sname:'Joinal',isAvailhostel:true},
+    {sid:4, sname:'Sukriti',isAvailhostel:false}
+
+];
+=================================================================================================
+3. In app.component.ts
+
+import { Component } from '@angular/core';
+import {STUDENTS} from './mock.students';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'DirectiveDemos';
+  studentList=STUDENTS;
+
+}
+
+===================================================================================================
+4. In app.component.html
+
+<h1>Welcome to NIIT</h1>
+<span>{{title}}</span>
+<p>My team members are</p>
+<ul>
+<li *ngFor="let student of studentList">
+{{student.sid}}<span>     </span>
+{{student.sname}}<span>     </span>
+{{student.isAvailhostel}}<span>     </span>
+</li>
+</ul>
+
+5. ng serve --open
+
+=========================================================================================
+Demo2: *ngIf
+============
+1. In app.component.html
+=======================
+<span *ngIf="studentList.length>0">
+  <p>My team members are</p>
+<ul>
+<li *ngFor="let student of studentList">
+{{student.sid}}<span>     </span>
+{{student.sname}}<span>     </span>
+{{student.isAvailhostel}}<span>     </span>
+</li>
+</ul>
+</span>
+
+
+2. In mock.students.ts
+===================
+import {Student} from './student';
+
+export const STUDENTS : Student[]=[
+    // {sid:1, sname:'Anjali',isAvailhostel:true},
+    // {sid:2, sname:'Gowtham',isAvailhostel:false},
+    // {sid:3, sname:'Joinal',isAvailhostel:true},
+    // {sid:4, sname:'Sukriti',isAvailhostel:false}
+
+];
+
+
+3. prove once with comment and then release comment.
+
+=============================================================
+Demo3: ngSwitch
+=================
+syntax:
+
+<container_element [ngSwitch]="switch_expression">
+    <inner_element *ngSwitchCase="match_expresson_1">...</inner_element>
+    <inner_element *ngSwitchCase="match_expresson_2">...</inner_element>
+    <inner_element *ngSwitchCase="match_expresson_3">...</inner_element>
+    <inner_element *ngSwitchDefault>...</element>
+</container_element>
+
+1. In app.component.ts
+
+  num: number= 0;
+
+2. In app.component.html
+
+<div>
+Input string : <input type='text' [(ngModel)]="num" />
+ <div [ngSwitch]="num">
+  <div *ngSwitchCase="'1'">One</div>
+  <div *ngSwitchCase="'2'">Two</div>
+  <div *ngSwitchCase="'3'">Three</div>
+  <div *ngSwitchCase="'4'">Four</div>
+  <div *ngSwitchCase="'5'">Five</div>
+  <div *ngSwitchDefault>This is Default</div>
+</div>
+</div>
+
+3. ng serve --open
+============================================================================================
+Demo4: ngStyle
+================== 
+
+1. In app.component.html 
+
+<h1>Welcome to NIIT</h1>
+<span>{{title}}</span>
+
+<span *ngIf="studentList.length>0">
+  <p>My team members are</p>
+<ul>
+<li *ngFor="let student of studentList" [ngStyle]="{color:student.isAvailhostel===true? 'Green':'Red'}">
+{{student.sid}}<span>     </span>
+{{student.sname}}<span>     </span>
+{{student.isAvailhostel}}<span>     </span>
+</li>
+</ul>
+</span>
+
+2. ng serve --open
+=========================================================================
+Demo5: ngClass
+===============
+1. Do two way data  binding using text box
+
+app.component.ts
+
+
+ searchValue:string='';
+
+=========================================================================
+2. app.module.ts
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms'
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+===============================================================================
+3. app.component.html
+
+<h1>Welcome to NIIT</h1>
+<span>{{title}}</span>
+<p>My team members are</p>
+<ul>
+<li *ngFor="let student of studentList"    [ngStyle]="{color:student.isAvailhostel===true? 'Orange':'Red'}" >
+{{student.sid}}<span>     </span>
+{{student.sname}}<span>     </span>
+{{student.isAvailhostel}}<span>     </span>
+</li>
+</ul>
+
+
+<h2>Example for ngClass</h2>
+<div>
+<span><b>Search:</b></span>
+<input type="text" [(ngModel)]="searchValue">
+<span *ngIf="searchValue !=''">
+  You are searching for "{{searchValue}}"
+</span>
+</div>
+
+//check the output once.
+===================================================================
+4. app.component.css
+
+.changeBackground{
+background-color: beige;
+
+}
+====================================================================
+5. app.component.html
+
+<h1>Welcome to NIIT</h1>
+<span>{{title}}</span>
+<p>My team members are</p>
+<ul>
+<li *ngFor="let student of studentList"    [ngStyle]="{color:student.isAvailhostel===true? 'Orange':'Red'}" >
+{{student.sid}}<span>     </span>
+{{student.sname}}<span>     </span>
+{{student.isAvailhostel}}<span>     </span>
+</li>
+</ul>
+
+
+<h2>Example for ngClass</h2>
+<div [ngClass]="{changeBackground:searchValue!=''}">
+<span><b>Search:</b></span>
+<input type="text" [(ngModel)]="searchValue">
+<span *ngIf="searchValue !=''">
+  You are searching for "{{searchValue}}"
+</span>
+</div>
+
+6. ng serve --open
+========================================================================================
+Demo6: Custom directives
+====================================================================================
+Directives are the classes that add additional behavior to elements
+Directives are declarables
+They must be declared by a NgModule to be usable in our App.
+To define directive mark the class (@) with decorator and provide metadata
+================================================================================== 
+Custom directives (our own logic) it can be used for reusable (can be applied in multiple component) -> DOM manipulation
+===================================================================================
+custom structural directives
+==========================
+Example: *check which should be similar to *ngIf
+
+1. ng g directive check
+
+2. CheckDirectie will auto referenced in app.module.ts
+
+3. In app.component.html
+
+<div *appCheck="true">
+<h1>Hello</h1>
+</div>
+
+
+4. In check.directive.ts
+
+import { Directive,Input,TemplateRef,ViewContainerRef} from '@angular/core';
+
+@Directive({
+  selector: '[appCheck]'
+})
+export class CheckDirective {
+
+  constructor(private templateRef:TemplateRef<any>,private viewContainerRef:ViewContainerRef) { }
+
+  @Input() set appCheck(data:boolean){
+  console.log("inside custom structural directive  "+data);
+  console.log(this.templateRef);
+  console.log(this.viewContainerRef);
+  }
+
+
+}
+
+5. output :
+
+it will not display the heading hello
+but the output console.log can be verified.
+=======================================================================================
+TemplateRef-> references the content within the container, from the above example refer
+<h1>Hello</h1>
+
+ViewContainerRef-> references the container itself to which directive is applied, from the above example refer
+
+<div *appCheck="true">
+<h1>Hello</h1>
+</div>
+
+Angular converts every structural directive to ng-template syntax
+
+ViewContainerRef API is given below
+createEmbeddedView()
+clear()
+===========================================================================================
+6. In check.directive.ts
+
+import { Directive,Input,TemplateRef,ViewContainerRef} from '@angular/core';
+
+@Directive({
+  selector: '[appCheck]'
+})
+export class CheckDirective {
+
+  constructor(private templateRef:TemplateRef<any>,private viewContainerRef:ViewContainerRef) { }
+
+  @Input() set appCheck(data:boolean){
+  console.log("inside custom structural directive  "+data);
+  console.log(this.templateRef);
+  console.log(this.viewContainerRef);
+  data ? this.viewContainerRef.createEmbeddedView(this.templateRef):this.viewContainerRef.clear();
+ 
+  }
+
+
+}
+
+7. ng serve --open
+=========================================================================================
+Demo7:Custom Attributes
+=======================
+
+1. ng g directive focus
+
+2. In focus.directive.ts
+
+import { Directive,Input,HostBinding,HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appFocus]'
+})
+export class FocusDirective {
+
+  constructor() { }
+
+  @Input('appFocus') color:string='';
+@HostBinding('style.backgroundColor')
+bgColor:string='';
+@HostListener('focus')onFocus(){
+  this.bgColor=this.color;
+  console.log("inside onFocus method");
+}
+@HostListener('blur')onBlur(){
+  this.bgColor='beige';
+  console.log("inside onBlur method");
+}
+
+}
+
+3. app.component.html
+
+<h2>Focus demo</h2>
+<input type="text" appFocus="green">
+
+4. ng serve --open
+===============================================
+Demo8: in another way of Demo7, ElementRef (alternate of HostBinding)
+=====================================================================
+1. In focus.directive.ts
+=====================
+import { Directive,Input,HostListener,ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appFocus]'
+})
+export class FocusDirective {
+
+
+  constructor(private elementRef:ElementRef) { }
+@Input('appFocus') color:string='';
+
+@HostListener('focus')onFocus(){
+    console.log("inside onFocus method");
+this.elementRef.nativeElement.style.backgroundColor=this.color;
+  }
+@HostListener('blur')onBlur(){
+  this.elementRef.nativeElement.style.backgroundColor='beige';
+  console.log("inside onBlur method");
+}
+
+}
+
+2. ng serve --open
+================================================ 
+

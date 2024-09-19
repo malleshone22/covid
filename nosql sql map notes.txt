@@ -1,0 +1,36 @@
+NoSql databases -It stores data in the form of object(document)
+SQL - data stored in the form table
+
+NoSql - Does not have schemas
+SQl - have strict schemas
+
+NoSql - no joins
+SQl - Joins
+
+Emp - table name
+id    name      age    - columns
+1     Ravi       20    - record or row
+2     Sanjeev    30
+3     Riruraj    32
+
+create table emp
+(id int pk,
+ name varchar(40),
+ age int
+)
+
+id    name   age   adress
+4     Rishi   34   chen
+
+
+Mongo(NOSQL)
+Emp - (collection)
+{"id":1,"name":"Ravi","age":20,"phone":123455},           - document
+{"id":2,"name":"Sanjeev"","age":30,"gender":"M"},       - id,name,age refered as field
+{"id":3,"name":"Rituraj","age":32,"address":"bangaluru"}         - 1,Ravi,20 refered as values
+
+
+
+
+
+

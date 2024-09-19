@@ -1,0 +1,60 @@
+aggregate([
+Stag1,   - document
+Stage2,  - document
+Stage3   - document
+...
+...
+
+
+StageN (result - record)
+])
+
+
+emp - collection
+{"name":"anil","age":13}
+{"name:"sunil","age":23}
+{"name":"rishi","age":13}
+
+Gr1 - 13
+Gr2 - 23
+
+db.emp.aggregate([
+// stage 1
+{$group:{_id:"$age"}}
+])
+
+
+-Stage
+   - $match
+   - $group
+   - $count
+   - $sort
+   - $project
+   - $unwind  
+   - $limit
+-Expressions
+    - "$name"
+    - "$age"
+    - "$address"
+-Accumulator - can only be used in $group stage 
+    - $sum
+    - $avg
+    - $max
+    - $min
+
+
+emp
+
+{1,ravi,[ph1,ph2,ph3]}
+{2,anil,[ph1,ph2,ph3]}
+{3,sujith,[ph1,ph2,ph3]}
+
+
+Group this collection based on PH
+
+$unwind based ph
+
+{1,ravi,ph1}
+{1,ravi,ph2}
+{1,ravi,ph23}
+

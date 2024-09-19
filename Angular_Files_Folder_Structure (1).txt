@@ -1,0 +1,144 @@
+Angular Files and Folders
+=========================
+ng new <Appname>
+=============================================================
+4 folder:
+
+.angular 
+.vscode  
+node_modules 
+src
+
+In .angular -> 2 sub folder angular-webpack and babel-webpack
+In .vscode ->  3 files .json files (extensions, launch, tasks)
+In node_modules -> many folders
+In src -> 2 sub folder app(inside app it will have 5 files .css, .html and 3 .ts files (spec,component,module) and assets (.gitkeep)
+4 files under src (favico.ico, index.html, main.ts, styles.css)
+9 files in root  (.editorconfig, .gitignore,angular.json,package-lock.json, package.json, README.md, tsconfig.app.json, tsconfig.json, tsconfig.spec.json) 	
+==========================================================================================
+
+0. .angular : From version 13.0.0 there will be a .angular folder generated in root which is ignored by git containing a cache folder which caches builds.
+
+1. .vscode : The .vscode folder holds your project workspace settings.
+
+2. node_modules : lib, 3rd party libraries are stored and our application might depend on. This folder only for development. We dont deploy this folder for production.
+Provides npm packages to the entire workspace. Workspace-wide node_modules dependencies are visible to all projects.
+
+3. src: we need to put all our application source code
+Source files for the root-level application project.
+
+4. src/app: Has one component called app.component and one module called app.module
+Contains the component files in which your application logic and data are defined. 
+
+5. src/app/app.component.ts:	Defines the logic for the application's root component, named AppComponent. The view associated with this root component becomes the root of the view hierarchy as you add components and services to your application.
+
+6. src/app/app.component.html:	Defines the HTML template associated with the root AppComponent.
+
+7. src/app/app.component.css:	Defines the base CSS stylesheet for the root AppComponent.
+
+8. src/app/app.component.spec.ts:	Defines a unit test for the root AppComponent.
+
+9. src/app/app.module.ts:	Defines the root module, named AppModule, that tells Angular how to assemble the application. Initially declares only the AppComponent. As you add more components to the app, they must be declared here. 
+
+10. assets: store static asset of an application like images, icon, text files etc.
+Contains image and other asset files to be copied as-is when you build your application.
+
+11. favicon.ico: icon files displays on the browser
+An icon to use for this application in the bookmark bar.
+
+12. index.html : main html files which gets render in the browser when angular app runs. we don't have any reference to style sheet or java script file. All dependencies are injected to these files during build process by angular CLI
+The main HTML page that is served when someone visits your site. The CLI automatically adds all JavaScript and CSS files when building your app, so you typically don't need to add any <script> or <link> tags here manually.
+
+13. main.ts : type script file, it is the starting point of angular application.(like main method in other prog lang), when ever angular application is run, the first file is main.ts, this file is an entry point of angular application. we bootstrap the main module to this project. Here main module is Appmodule so bootstrap Appmodule to our project. Angular will load this module and starts from here.
+The main entry point for your application. Compiles the application with the JIT compiler and bootstraps the application's root module (AppModule) to run in the browser. You can also use the AOT compiler without changing any code by appending the --aot flag to the CLI build and serve commands.
+
+
+14. styles.css : add global css styles for our angular application also each component can have own its style.
+Lists CSS files that supply styles for a project. The extension reflects the style preprocessor you have configured for the project.
+
+
+15. .editorconfig : developer to follow standard coding rules
+Configuration for code editors. 
+
+
+16. .gitignore : we can specify the file or folder to exclude storing on git repository
+Specifies intentionally untracked files that Git should ignore.
+
+17. angular.json : contains all the configuration of our angular projects, has project name, root folder name etc. (lower version, we had angularcli.json)
+CLI configuration defaults for all projects in the workspace, including configuration options for build, serve, and test tools that the CLI uses, such as Karma, and Protractor. 
+
+From angular 6, the angular-cli.json file has been replaced by angular.json. That means if you are working with angular 5 or any lower, then you will not find this file instead you will find the angular-cli.json file.
+
+This is one of the most important files and it contains all the configuration of your Angular Project. It contains the configurations such as what is the project name, what is the root directory as source folder (src) name which contains all the components, services, directives, pipes, what is the starting point of your angular application (index.html file), What is the starting point of typescript file (main.ts), etc. 
+
+18. package-lock.json:
+Provides version information for all packages installed into node_modules by the npm client. If you use the yarn client, this file will be yarn.lock instead.
+The package-lock.json is automatically generated for those operations where npm modifies either the node_modules tree or package.json. In other words, the package.lock.json is generated after an npm install.
+
+19. package.json : standard configuration like name, version, scripts, dependencies and devDependencies(development purpose). example @angular/core is used in Appcomponent during component import is under dependencies. devDependencies has @angular/cli.
+devDependencies dont need in production only need for development purpose.
+dependencies is required for our project development.
+
+Configures npm package dependencies that are available to all projects in the workspace. 
+
+This file is mandatory for every npm project. It contains basic information regarding the project (name, description, license, etc), commands which can be used, dependencies – these are packages required by the application to work correctly, and dependencies – again the list of packages which are required for application however only during the development phase i.e. we need Angular CLI only during development to build a final package however for production we don’t use it anymore. We will discuss this file in detail in our upcoming articles.
+
+20. ReadME.md : Introductory documentation for the root application.
+
+21. tsconfig.app.json :
+Application-specific TypeScript configuration, including TypeScript and Angular template compiler options. 
+This file is used during the compilation of your application and it contains the configuration information about how your application should be compiled.
+
+22. tsconfig.json: settings for typescript compiler (based on these settings, our .ts will get compile)
+The base TypeScript configuration for projects in the workspace. All other configuration files inherit from this base file. 
+This file contains the configurations for typescripts. If there is a tsconfig file in a directory, that means that the directory is a root directory of a typescript project, moreover, it is also used to define different typescript compilation-related options.
+
+23. tsconfig.spec.json :
+TypeScript configuration for the application tests. 
+This file is used for testing purposes in the node.js environment. It also helps in maintaining the details for testing.
+
+24. src/app/app.config.ts: Defines the application config logic that tells Angular how to assemble the application. As you add more providers to the app, they must be declared here. Only generated when using the --standalone option.  
+
+==============================================================================================================  
+These files not found in the current version
+============================================
+
+//not found
+1. e2e
+e2e stands for end-to-end testing. This is not for testing your application functionality (it is not for unit testing) rather it is used for testing the user behavior when it is deployed on the production server. That means it will monitor who visits your application, which users log in to your application, how much time they stay in your application, how many pages a user visits within your application, when the user logout from your application, etc. Please have a look at the e2e folder content.
+
+// not found
+2. envrionments: set up the environments, it has 2 files one for production and other for development like database credentials or Server IP address.
+
+//not found
+3. polyfills.ts : basically import scripts, required to running the angular. will fill the gap of JavaScript that angular needs. features supported by current browser
+
+This file is basically used for browser-related configuration. In angular, you write the code using typescript language. The Polyfills.ts file is used by the compiler to compile your Typescript code to a specific JavaScript method so that it can be parsed by different browsers.
+
+The polyfill.ts file imported the required script which is required for running an Angular application. This is because the angular framework uses the latest features of JavaScript which are not available in the current version of JavaScript supported by most of the browsers. So, basically, the polyfills.ts file fills the gap to provide the features of JavaScript that are needed by Angular and the feature supported by the latest browsers. It is mainly used for backward compatibility
+
+//not found
+4. .browserlistrc :
+
+This file is currently used by autoprefixer to adjust CSS to support the specified browsers.
+
+//not found
+5. test.ts : setting up our testing environment
+
+The test.ts file is the configuration file of Karma which is used for setting the test environment. Within this file, the tester will write the unit test cases for testing the project.
+
+//not found
+6. karma.conf.js : configuration file for karma (test runner for javascript)
+
+The karma.config.js file is used to store the setting of karma i.e. test cases. It has a configuration for writing unit tests. Karma is the test runner and it uses jasmine as a framework. Both tester and framework are developed by the angular team for writing unit tests.
+
+//not found
+7. tslint.json:
+
+This is a tool useful for static analysis that checks our TypeScript code for readability, maintainability, and functionality errors. We will see how it works in a further lesson.
+
+==============================================================================================================
+https://code.visualstudio.com/docs/getstarted/settings
+https://angular.io/guide/file-structure
+https://stackoverflow.com/questions/69953135/clear-angular-cache-in-angular-folder
+==============================================================================================================
